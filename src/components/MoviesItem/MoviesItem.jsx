@@ -5,21 +5,20 @@ const defaultImg =
   'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700';
 
 export default function MoviesItem({ image, title, rating, id }) {
-  const basicUrlForImage = 'https://image.tmdb.org/t/p/w500';
   const location = useLocation();
 
   return (
     <li className={css.movieGalleryItem}>
       <div className={css.imgWraper}>
         <img
-          src={image ? `${basicUrlForImage}${image}` : defaultImg}
+          src={image ? `${image}` : defaultImg}
           alt={title}
           className={css.movieGalleryItemImage}
         />
       </div>
       <h2>{title}</h2>
       <h3>Рейтинг ☆ {rating}</h3>
-      <Link className={css.linkDetails} to={`/movies/${id}`} state={location}>
+      <Link className={css.linkDetails} to={`/catalog/${id}`} state={location}>
         Details
       </Link>
     </li>

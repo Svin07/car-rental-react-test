@@ -17,7 +17,8 @@ export default function Header() {
         <h2>*GREAT LOGO*</h2>
       </Link>
       <StyledLink to="/">Home</StyledLink>
-      <StyledLink to="movies">Movies</StyledLink>
+      <StyledLink to="catalog">Catalog</StyledLink>
+      <StyledLink to="favorites">Favorites</StyledLink>
     </header>
   );
 }
