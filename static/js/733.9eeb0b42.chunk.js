@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkcar_rental_react_test=self.webpackChunkcar_rental_react_test||[]).push([[733],{733:function(e,s,t){t.r(s),t.d(s,{default:function(){return n}});var r=t(184);function n(){return(0,r.jsx)(r.Fragment,{children:(0,r.jsxs)("div",{children:[(0,r.jsx)("h1",{children:"\u0421\u0442\u043e\u0440\u0456\u043d\u043a\u0430 \u0423\u043b\u044e\u0431\u043b\u0435\u043d\u0438\u0445"}),(0,r.jsx)("ul",{className:"{css.movieslist}"})]})})}}}]);
+//# sourceMappingURL=733.9eeb0b42.chunk.js.map
