@@ -1,18 +1,20 @@
-import { Circles } from 'react-loader-spinner';
+import { RotatingLines } from 'react-loader-spinner';
+import css from './Loader.module.css';
 
 export default function Loader() {
   return (
-    <Circles
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      height="80"
-      width="80"
-      color="#4fa94d"
-      ariaLabel="circles-loading"
-      wrapperStyle={{}}
-      wrapperClass=""
-      visible={true}
-    />
+    <div className={css.flexcenter}>
+      <RotatingLines
+        visible={true}
+        height="96"
+        width="96"
+        color="#3470ff"
+        strokeWidth="5"
+        animationDuration="0.75"
+        ariaLabel="rotating-lines-loading"
+        wrapperStyle={{}}
+        wrapperClass=""
+      />
+    </div>
   );
 }

@@ -1,0 +1,150 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(46, 47, 66, 0.4);
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modalwindow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 541px;
+  height: 752px;
+  background-color: #fff;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 1px 3px rgba(0, 0, 0, 0.12),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 24px;
+}
+
+.modalclosebtn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: var(--accent-color);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modalclosebtn:hover {
+  background-color: var(--logo-color);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.modalclosebtn:focus {
+  background-color: var(--logo-color);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.prodactcard {
+  padding: 40px;
+  overflow: auto;
+}
+
+.imgWraper {
+  background-color: #fff;
+}
+
+.movieGalleryItemImage {
+  width: 461px;
+  height: 248px;
+  border-radius: 14px;
+  object-fit: cover;
+}
+
+.movieGalleryItemImage:hover {
+  cursor: zoom-in;
+}
+
+.linkDetails {
+  display: block;
+  margin-top: 17px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color: #3470ff;
+  text-align: center;
+  color: #fff;
+  border: 0;
+  border-radius: 12px;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 24px;
+  font-style: normal;
+  font-weight: 500;
+  min-width: 168px;
+  max-height: 44px;
+}
+
+.linkDetails:hover,
+.linkDetails:focus {
+  background-color: #0b44cd;
+}
+
+.titlewraper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 14;
+}
+
+.itemtitle {
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 500;
+  color: #121417;
+}
+.rentalprice {
+  display: inline-block;
+  border-radius: 35px;
+  background-color: #f9f9f9;
+  margin: 0 8px 0 0;
+  padding: 7px 14px;
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: #363535;
+}
+
+.description {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #121417;
+}
+
+.accessories {
+  overflow: auto;
+  margin-bottom: 8px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: #121417;
+}
+
+.text {
+  margin: 0px;
+  font-size: 12px;
+  line-height: 18px;
+  font-style: normal;
+  font-weight: 400;
+  color: #121417;
+  opacity: 50%;
+}
+.titlespan {
+  color: #3470ff;
+}

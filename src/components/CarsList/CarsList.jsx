@@ -3,7 +3,12 @@
 import css from './CarsList.module.css';
 import MoviesItem from '../MoviesItem/MoviesItem';
 
-export default function CarsList({ cars }) {
+export default function CarsList({
+  cars,
+  handlySearchfromId,
+  addToFavorite,
+  deleteFromFavorite,
+}) {
   return (
     <>
       <div>
@@ -11,10 +16,10 @@ export default function CarsList({ cars }) {
           {cars.map(car => (
             <MoviesItem
               key={car.id}
-              id={car.id}
-              image={car.img}
-              title={car.model}
-              rating={car.rentalPrice}
+              car={car}
+              handlySearchfromId={handlySearchfromId}
+              addToFavorite={addToFavorite}
+              deleteFromFavorite={deleteFromFavorite}
             />
           ))}
         </ul>

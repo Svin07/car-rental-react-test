@@ -1,15 +1,29 @@
-@import-normalize; /* bring in normalize.css styles */
-
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* @import-normalize; bring in normalize.css styles */
+@font-face {
+  font-family: 'Manrope', sans-serif;
+  src: url('https://fonts.googleapis.com/css2?family=Manrope:wght@500;600&display=swap');
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  background-color: #fff;
+  margin: 0;
+  font-family: 'Manrope', sans-serif;
+}
+
+/* вимикаємо скролл */
+.disable-scroll {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+button {
+  padding: 0;
+  border: none;
+  font: inherit;
+
+  color: inherit;
+  background-color: transparent;
+  cursor: pointer;
 }

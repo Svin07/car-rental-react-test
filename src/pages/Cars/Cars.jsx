@@ -6,7 +6,7 @@ import { getMoviesBySearch } from 'API/API/api';
 import Search from '../../components/Search/Search';
 import { useSearchParams } from 'react-router-dom';
 
-export default function Movies() {
+export default function Cars() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [movies, setMovies] = useState([]);

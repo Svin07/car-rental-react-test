@@ -3,35 +3,56 @@ axios.defaults.baseURL = `https://65bccb30b51f9b29e9324a6b.mockapi.io/`;
 
 // Запит для отримання колекції за пошуком
 
-export const getMoviesBySearch = async (query, page) => {
-  const { data } = await axios(`/search/movie?query=${query}&api_key=`);
+export const getCarsBySearch = async query => {
+  const { data } = await axios.get(`/adverts?search=${query}`);
   return data;
 };
 
-// Запит для отримання колекції популярних
+// Запит для отримання всієї колекції авто
 
-export const getAllCars = async () => {
-  const { data } = await axios(`/adverts`);
+export const getAllCars = async page => {
+  const { data } = await axios.get(`/adverts?page=${page}&limit=12`);
   return data;
 };
 
-// Запит для отримання детальної інформації про фільм
+// Запит для отримання детальної інформації про авто за id
 
-export const getDetailsMoviesById = async id => {
-  const { data } = await axios(`/movie/${id}?api_key=`);
+export const getCarById = async id => {
+  const { data } = await axios.get(`/adverts/?id=${id}`);
   return data;
 };
 
-// Запит для отримання детальної інформації про акторів
+// Додавання до списку обраного
 
-export const getDetailsMoviesCast = async id => {
-  const { data } = await axios(`/movie/${id}/credits?api_key`);
+export const postInFavorites = async obj => {
+  const { data } = await axios.post(`/favorites/`, obj);
   return data;
 };
 
-// Запит для отримання детальної інформації про огляди
+// Видалення зі списку обраного
 
-export const getDetailsMoviesReviews = async id => {
-  const { data } = await axios(`/movie/${id}/reviews?api_key`);
+export const deleteInFavorites = async obj => {
+  const { data } = await axios.delete(`/favorites/`, obj);
+  return data;
+};
+
+// Запит для отримання детальної інформації про обрані за id
+
+export const getFavoritesById = async id => {
+  const { data } = await axios.get(`/favorites?id=${id}`);
+  return data;
+};
+
+// Запит для отримання колекції обраного за пошуком id
+
+export const getFavoritesBySearch = async query => {
+  const { data } = await axios.get(`/favorites?search=${query}`);
+  return data;
+};
+
+// Запит для отримання всієї колекції обраного
+
+export const getFavorites = async id => {
+  const { data } = await axios.get(`/favorites`);
   return data;
 };

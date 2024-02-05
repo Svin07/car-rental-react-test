@@ -1,0 +1,27 @@
+/*
+* Стили компонента Buton (Load more)
+*/
+.Button {
+  display: block;
+  margin: 100px auto;
+  padding: 0;
+  background-color: #fff;
+  text-align: center;
+  color: #3470ff;
+  border: 0;
+  text-decoration: underline;
+  cursor: pointer;
+
+  font-size: 16px;
+  line-height: 24px;
+  font-style: normal;
+  font-weight: 500;
+  min-width: 79px;
+}
+
+.Button:hover,
+.Button:focus {
+  color: #0b44cd;
+  text-decoration: underline;
+  text-decoration-style: double;
+}
