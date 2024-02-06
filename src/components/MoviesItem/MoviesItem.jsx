@@ -1,11 +1,16 @@
 import { Link } from 'react-router-dom';
 import css from './MoviesItem.module.css';
-import { useLocation } from 'react-router-dom';
+
 import FavoritIcon from 'components/Cast/FavoritIcon';
 const defaultImg =
   'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700';
 
-export default function MoviesItem({ car, handlySearchfromId, addToFavorite }) {
+export default function MoviesItem({
+  car,
+  handlySearchfromId,
+  addToFavorite,
+  deleteFromFavorite,
+}) {
   const {
     img,
     id,
@@ -17,11 +22,10 @@ export default function MoviesItem({ car, handlySearchfromId, addToFavorite }) {
     address,
     rentalCompany,
     accessories,
+    isFavorite,
   } = car;
 
   const newAdress = address.split(',');
-
-  const location = useLocation();
 
   const onClickBtn = e => {
     handlySearchfromId(id);
@@ -29,7 +33,12 @@ export default function MoviesItem({ car, handlySearchfromId, addToFavorite }) {
 
   return (
     <li className={css.movieGalleryItem}>
-      <FavoritIcon addToFavorite={addToFavorite} id={id} />
+      <FavoritIcon
+        addToFavorite={addToFavorite}
+        id={id}
+        favor={isFavorite}
+        deleteFromFavorite={deleteFromFavorite}
+      />
       <div className={css.imgWraper}>
         <img
           src={img ? `${img}` : defaultImg}
@@ -48,7 +57,7 @@ export default function MoviesItem({ car, handlySearchfromId, addToFavorite }) {
         {newAdress[1]} |{newAdress[2]} | {rentalCompany} | {type} | {id} |{' '}
         {accessories[0]}
       </p>
-      <Link className={css.linkDetails} onClick={onClickBtn} state={location}>
+      <Link className={css.linkDetails} onClick={onClickBtn}>
         Learn more
       </Link>
     </li>

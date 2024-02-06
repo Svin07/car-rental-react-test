@@ -12,7 +12,6 @@ export default function ModalWindow({ car, togleModal, isLoading, error }) {
     rentalPrice,
     address,
     description,
-    rentalCompany,
     functionalities,
     accessories,
     fuelConsumption,

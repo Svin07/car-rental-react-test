@@ -3,30 +3,21 @@ import { useState } from 'react';
 import css from './FavoritIcon.module.css';
 import normal from '../../img/normal.svg';
 import active from '../../img/active.svg';
-import { getFavoritesBySearch } from 'API/API/api';
 
-export default function FavoritIcon({ addToFavorite, id, deleteFromFavorite }) {
-  const [isFavorite, setIsFavorite] = useState(false);
+export default function FavoritIcon({
+  addToFavorite,
+  id,
+  deleteFromFavorite,
+  favor,
+}) {
+  const [isFavorite, setIsFavorite] = useState(favor);
 
-  // useEffect(() => {
-  //   console.log(isFavorite);
-  // }, [isFavorite]);
+  function onClickFavorite() {
+    setIsFavorite(!isFavorite);
 
-  async function onClickFavorite() {
-    try {
-      const data = await getFavoritesBySearch(id);
-      console.log(data);
-
-      if (data.length === 0 || !data) {
-        await addToFavorite(id);
-        setIsFavorite(!isFavorite);
-        return;
-      }
-      const { favoritesId } = data[0];
-      await deleteFromFavorite(favoritesId);
-    } catch (error) {
-      console.log(error.response.data.status_message);
-    }
+    if (!isFavorite) {
+      addToFavorite(id);
+    } else deleteFromFavorite(id);
   }
 
   return (

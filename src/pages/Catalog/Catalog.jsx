@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import Loader from '../../components/Loader/Loader';
 import {
+  deleteInFavorites,
   getAllCars,
   getCarById,
   getCarsBySearch,
-  postInFavorites,
+  putInFavorites,
 } from 'API/API/api';
 import CarsList from '../../components/CarsList/CarsList';
 import Search from '../../components/Search/Search';
@@ -16,48 +17,39 @@ const Catalog = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [cars, setCars] = useState([]);
-  const [page, setPage] = useState(1);
   const [carById, setCarById] = useState({});
-
+  const [page, setPage] = useState(1);
   const [modalOpen, setModalOpen] = useState(false);
 
   const body = document.body;
   const totalPage = 3;
 
-  useEffect(() => {
-    const fetchCars = async () => {
-      try {
-        setIsLoading(true);
-        const data = await getAllCars(page);
-
-        setCars(prevCars => [...prevCars, ...data]);
-      } catch (error) {
-        setError(error.response.data.status_message);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchCars();
-  }, [page]);
-
-  const paginationPageUpdate = () => {
-    setPage(prevPage => prevPage + 1);
-  };
-  const handlySetSearchQuery = async query => {
-    if (!query) {
-      console.log('Неможливо знайти значення!');
-      return;
-    }
+  const fetchCars = async () => {
     try {
       setIsLoading(true);
-      const data = await getCarsBySearch(query);
-      setCars(data);
+      const data = await getAllCars(page);
+
+      setCars(prevCars => [...prevCars, ...data]);
     } catch (error) {
       setError(error.response.data.status_message);
     } finally {
       setIsLoading(false);
     }
+  };
+
+  useEffect(() => {
+    fetchCars();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page]);
+
+  const paginationPageUpdate = () => {
+    setPage(prevPage => prevPage + 1);
+  };
+
+  const handlySetSearchQuery = async query => {
+    const newCars = await getCarsBySearch(query);
+
+    setCars(prevCars => newCars);
   };
 
   const toggleModal = () => {
@@ -87,27 +79,28 @@ const Catalog = () => {
   };
 
   const addToFavorite = async id => {
-    try {
-      setIsLoading(true);
-      const obj = { favoritesId: id };
-      await postInFavorites(obj);
-    } catch (error) {
-      setError(error.response.data.status_message);
-    } finally {
-      setIsLoading(false);
-    }
+    const obj = { isFavorite: true };
+    await putInFavorites(id, obj);
+
+    cars.forEach(car => {
+      if (car.id === id) {
+        car.isFavorite = true;
+      }
+    });
+    setCars(prevCars => cars);
   };
 
   const deleteFromFavorite = async id => {
-    try {
-      setIsLoading(true);
-      const obj = { id: id };
-      await deleteFromFavorite(obj);
-    } catch (error) {
-      setError(error.response.data.status_message);
-    } finally {
-      setIsLoading(false);
-    }
+    const obj = { isFavorite: false };
+    await deleteInFavorites(obj);
+
+    cars.forEach(car => {
+      if (car.id === id) {
+        car.isFavorite = false;
+      }
+    });
+
+    setCars(prevCars => cars);
   };
 
   return (

@@ -24,15 +24,15 @@ export const getCarById = async id => {
 
 // Додавання до списку обраного
 
-export const postInFavorites = async obj => {
-  const { data } = await axios.post(`/favorites/`, obj);
+export const putInFavorites = async (id, obj) => {
+  const { data } = await axios.patch(`/adverts/?id=${id}`, obj);
   return data;
 };
 
 // Видалення зі списку обраного
 
-export const deleteInFavorites = async obj => {
-  const { data } = await axios.delete(`/favorites/`, obj);
+export const deleteInFavorites = async (id, obj) => {
+  const { data } = await axios.delete(`/adverts/?id=${id}`, obj);
   return data;
 };
 
