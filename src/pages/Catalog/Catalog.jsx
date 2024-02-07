@@ -7,6 +7,7 @@ import Search from '../../components/Search/Search';
 import Button from 'components/Button/Button';
 import css from './Home.module.css';
 import ModalWindow from 'components/ModalWindow/ModalWindow';
+import { save } from 'helpers/getLocalStorage';
 
 const Catalog = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -79,19 +80,17 @@ const Catalog = () => {
 
     newFavoriteCar.isFavorite = true;
 
-    // const arr = [];
-    // arr.push(newFavoriteCar);
-
     setfavoriteCar(prevCars => [...prevCars, newFavoriteCar]);
   };
 
   const deleteFromFavorite = async id => {
-    // const deletedCar = favoriteCar.find(car, index => car.id === id);
-    // deletedCar.isFavorite = false;
-    // setfavoriteCar(prevCars => prevCars.splice(index, 1));
+    const newFavoriteCar = favoriteCar.filter(car => car.id !== id);
+
+    setfavoriteCar(prevCars => newFavoriteCar);
   };
   useEffect(() => {
     console.log(favoriteCar);
+    save('cars', favoriteCar);
   }, [favoriteCar]);
   return (
     <>
