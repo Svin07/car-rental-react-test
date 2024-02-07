@@ -1,12 +1,7 @@
+/* eslint-disable no-unused-expressions */
 import { useState, useEffect } from 'react';
 import Loader from '../../components/Loader/Loader';
-import {
-  deleteInFavorites,
-  getAllCars,
-  getCarById,
-  getCarsBySearch,
-  putInFavorites,
-} from 'API/API/api';
+import { getAllCars, getCarById, getCarsBySearch } from 'API/API/api';
 import CarsList from '../../components/CarsList/CarsList';
 import Search from '../../components/Search/Search';
 import Button from 'components/Button/Button';
@@ -20,6 +15,7 @@ const Catalog = () => {
   const [carById, setCarById] = useState({});
   const [page, setPage] = useState(1);
   const [modalOpen, setModalOpen] = useState(false);
+  const [favoriteCar, setfavoriteCar] = useState([]);
 
   const body = document.body;
   const totalPage = 3;
@@ -79,30 +75,24 @@ const Catalog = () => {
   };
 
   const addToFavorite = async id => {
-    const obj = { isFavorite: true };
-    await putInFavorites(id, obj);
+    const newFavoriteCar = cars.find(car => car.id === id);
 
-    cars.forEach(car => {
-      if (car.id === id) {
-        car.isFavorite = true;
-      }
-    });
-    setCars(prevCars => cars);
+    newFavoriteCar.isFavorite = true;
+
+    // const arr = [];
+    // arr.push(newFavoriteCar);
+
+    setfavoriteCar(prevCars => [...prevCars, newFavoriteCar]);
   };
 
   const deleteFromFavorite = async id => {
-    const obj = { isFavorite: false };
-    await deleteInFavorites(obj);
-
-    cars.forEach(car => {
-      if (car.id === id) {
-        car.isFavorite = false;
-      }
-    });
-
-    setCars(prevCars => cars);
+    // const deletedCar = favoriteCar.find(car, index => car.id === id);
+    // deletedCar.isFavorite = false;
+    // setfavoriteCar(prevCars => prevCars.splice(index, 1));
   };
-
+  useEffect(() => {
+    console.log(favoriteCar);
+  }, [favoriteCar]);
   return (
     <>
       {modalOpen && (
