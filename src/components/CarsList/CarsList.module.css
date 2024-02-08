@@ -1,14 +1,8 @@
 .carslist {
-  display: grid;
-  max-width: 1184px;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-column: auto;
-  grid-gap: 29px;
-  margin-top: 21px;
-  margin-bottom: 20px;
-  padding: 0;
-  list-style: none;
-  margin-left: auto;
-  margin-right: auto;
-  background-color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 29px 50px;
+  margin-bottom: 100px;
+  text-align: center;
 }

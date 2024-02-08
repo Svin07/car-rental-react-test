@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getAllCars, getAllCarsWithoutPage } from './carsOperations';
+import { getAllCars, getAllCarsWithoutPage } from './carsAPI';
 
 const handlePending = state => {
   state.isLoading = true;

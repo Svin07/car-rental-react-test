@@ -1,106 +1,182 @@
-import { useEffect, useState } from 'react';
+/* eslint-disable no-use-before-define */
+import { useState } from 'react';
+import { modelData, priceData } from '../../constants/dataConstants';
+
+import { useDispatch, useSelector } from 'react-redux';
+
+import { setValueFilter } from '../../redux/filters/filterSlice';
+import { selectBrand, selectPrice } from '../../redux/filters/filterSelectors';
+
 import css from './Search.module.css';
 
-export default function Search({ handlySetSearchQuery }) {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const modelCar = [
-    'Buick',
-    'Volvo',
-    'HUMMER',
-    'Subaru',
-    'Mitsubishi',
-    'Nissan',
-    'Lincoln',
-    'GMC',
-    'Hyundai',
-    'MINI',
-    'Bentley',
-    'Mercedes-Benz',
-    'Aston Martin',
-    'Pontiac',
-    'Lamborghini',
-    'Audi',
-    'BMW',
-    'Chevrolet',
-    'Mercedes-Benz',
-    'Chrysler',
-    'Kia',
-    'Land',
-  ];
+export default function Search() {
+  const brandFilter = useSelector(selectBrand);
+  const priceFilter = useSelector(selectPrice);
 
-  const [query, setQuery] = useState('');
-  const [value, setValue] = useState('null');
+  const [selectedBrand, setSelectedBrand] = useState(
+    brandFilter ? brandFilter : 'Enter the text'
+  );
+  const [isShownSelectBrand, setShownSelectBrand] = useState(false);
+  const [isShownSelectPrice, setShownSelectPrice] = useState(false);
+  const [selectedPrice, setSelectedPrice] = useState(
+    priceFilter ? priceFilter : 'To $'
+  );
+  const [selectedFromMileage, setSelectedFromMileage] = useState('');
+  const [selectedToMileage, setSelectedToMileage] = useState('');
+  const dispatch = useDispatch();
 
-  const option = modelCar.map((model, index) => {
-    return (
-      <option key={index} value={index}>
-        {model}
-      </option>
-    );
-  });
-
-  useEffect(() => {
-    const newModel = modelCar[value];
-    setQuery(newModel);
-  }, [value, modelCar]);
-
-  const getSelect = e => {
-    setValue(e.target.value);
+  const handleShownSelectedBrand = e => {
+    e.preventDefault();
+    setShownSelectBrand(prev => !prev);
   };
 
-  // const handlyChange = ({ target: { value } }) => {
-  //   setQuery(value);
-  // };
-
-  const onSubmit = e => {
+  const handleShownSelectedPrice = e => {
     e.preventDefault();
-    setQuery(modelCar[value]);
+    setShownSelectPrice(prev => !prev);
+  };
+  const changeBrand = brand => {
+    setSelectedBrand(brand);
+    setShownSelectBrand(false);
+  };
+  const changePrice = price => {
+    setSelectedPrice(price + ' $');
+    setShownSelectPrice(false);
+  };
 
-    handlySetSearchQuery(query);
+  const handleInputChangeFrom = e => {
+    const { value } = e.target;
+    setSelectedFromMileage(value.replace(/,/g, ''));
+  };
+
+  const handleInputChangeTo = e => {
+    const { value } = e.target;
+    setSelectedToMileage(value.replace(/,/g, ''));
+  };
+
+  const handleFilterSubmit = e => {
+    e.preventDefault();
+    if (
+      selectedBrand === 'Enter the text' &&
+      selectedPrice === 'To $' &&
+      !selectedFromMileage &&
+      !selectedToMileage
+    ) {
+      return;
+    }
+    const data = {
+      brand: selectedBrand === 'Enter the text' ? '' : selectedBrand,
+      price: selectedPrice === 'To $' ? '' : `$${parseInt(selectedPrice, 10)}`,
+      mileageFrom: selectedFromMileage.trim(),
+      mileageTo: selectedToMileage.trim(),
+      onFilter: true,
+    };
+    dispatch(setValueFilter(data));
+  };
+
+  const handleFilterClear = e => {
+    e.preventDefault();
+    const data = {
+      brand: '',
+      price: '',
+      mileageFrom: '',
+      mileageTo: '',
+      onFilter: false,
+    };
+
+    dispatch(setValueFilter(data));
+    setSelectedBrand('Enter the text');
+    setSelectedPrice('To $');
+    setSelectedFromMileage('');
+    setSelectedToMileage('');
   };
 
   return (
-    <div className={css.searchbar}>
-      <form onSubmit={onSubmit} className={css.searchform}>
-        <label className={css.labelforselect} htmlFor="car-select">
-          Car brand
-          <select name="Car brand" value={value} onChange={getSelect}>
-            <option value="null" disabled>
-              Enter the text
-            </option>
-            {option}
+    <form className={css.searchform}>
+      <div>
+        <label className={css.filterLabel}>Car brand</label>
+        <div style={{ position: 'relative' }}>
+          <select className={css.select} onClick={handleShownSelectedBrand}>
+            {selectedBrand}
           </select>
-        </label>
-
-        <label className={css.labelforselect} htmlFor="">
-          Price/ 1 hour
-          <select name="Price/ 1 hour"></select>
-        </label>
-
-        <label>
-          Сar mileage / km
-          <div className="labelforinput">
+          {isShownSelectBrand && (
+            <div className={css.dropedown}>
+              <ul className={css.dropdownlist}>
+                {modelData.map(el => (
+                  <li
+                    className={css.dropdownitem}
+                    key={el}
+                    onClick={() => changeBrand(el)}
+                  >
+                    {el}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      </div>
+      <div>
+        <label className={css.filterLabel}>Price/ 1 hour</label>
+        <div style={{ position: 'relative' }}>
+          <select className={css.select} onClick={handleShownSelectedPrice}>
+            {selectedPrice}
+          </select>
+          {isShownSelectPrice && (
+            <div className={css.dropdownprise}>
+              <ul className={css.dropdownlist}>
+                {priceData.map(el => (
+                  <li
+                    className={css.dropdownitem}
+                    key={el}
+                    onClick={() => changePrice(el)}
+                  >
+                    {el}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      </div>
+      <div>
+        <label className={css.filterLabel}>Сar mileage / km</label>
+        <div style={{ display: 'flex' }}>
+          <div className={css.inputwrap}>
             <input
-              className={css.searchforminput}
+              className={css.inputfrom}
               type="text"
-              // onChange={handlyChange}
-              placeholder="From"
-              // value={query}
+              mask="9,999"
+              title="Only number"
+              onChange={handleInputChangeFrom}
+              value={selectedFromMileage}
+              id="mileageFrom"
             />
-            <input
-              className={css.searchforminput}
-              type="text"
-              // onChange={handlyChange}
-              placeholder="To"
-              // value={query}
-            />
+            <label className={css.label} htmlFor="mileageFrom">
+              From
+            </label>
           </div>
-        </label>
-
-        <button type="submit" className={css.searchformbutton}>
-          Search
-        </button>
-      </form>
-    </div>
+          <div className={css.inputwrap}>
+            <input
+              className={css.inputto}
+              type="text"
+              mask="9,999"
+              title="Only number"
+              onChange={handleInputChangeTo}
+              value={selectedToMileage}
+              id="mileageTo"
+            />
+            <label className={css.labelinput} htmlFor="mileageTo">
+              To
+            </label>
+          </div>
+        </div>
+      </div>
+      <button className={css.searchformbutton} onClick={handleFilterSubmit}>
+        Search
+      </button>
+      <button className={css.searchformbutton} onClick={handleFilterClear}>
+        Reset
+      </button>
+    </form>
   );
 }

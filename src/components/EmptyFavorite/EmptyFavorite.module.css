@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  background-image: url('../../img/404_12.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: calc(100vh - (95px + 84px));
+}
+
+.emptytext {
+  padding-top: 80px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 28px;
+  font-weight: 600;
+  text-align: center;
+  color: #fff;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 44px;
+  text-shadow: 1px 1px 0px #000000, -1px -1px 0px #ffffff;
+}
+
+@media screen and (min-width: 760px) {
+  .emptytext {
+    padding-top: 150px;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .emptytext {
+    padding-top: 220px;
+  }
+}
+
+.link {
+  text-decoration: underline;
+  color: blue;
+}

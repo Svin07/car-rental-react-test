@@ -1,16 +1,16 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-axios.defaults.baseURL = 'https://65ba7939b4d53c06655301c5.mockapi.io';
+axios.defaults.baseURL = `https://65bccb30b51f9b29e9324a6b.mockapi.io/`;
 
 export const getAllCars = createAsyncThunk(
   'cars/getAll',
   async (page, { rejectWithValue }) => {
     try {
-      const { data } = await axios.get(`/adverts?p=${page}&l=12`);
+      const { data } = await axios.get(`/adverts?p=${page}&limit=12`);
       return data;
-    } catch (e) {
-      return rejectWithValue(e.message);
+    } catch (err) {
+      return rejectWithValue(err.message);
     }
   }
 );
@@ -21,8 +21,8 @@ export const getAllCarsWithoutPage = createAsyncThunk(
     try {
       const { data } = await axios.get(`/adverts`);
       return data;
-    } catch (e) {
-      return rejectWithValue(e.message);
+    } catch (err) {
+      return rejectWithValue(err.message);
     }
   }
 );

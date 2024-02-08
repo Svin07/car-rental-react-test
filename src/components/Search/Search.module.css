@@ -8,20 +8,116 @@
   overflow: hidden;
 }
 
-.searchbar {
-  top: 0;
-  left: 0;
-  position: sticky;
-  z-index: 10;
+.filterLabel {
+  font-size: 12px;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 64px;
-  padding-right: 24px;
-  padding-left: 24px;
-  padding-top: 12px;
-  padding-bottom: 12px;
-  background-color: #fff;
+  margin-bottom: 8px;
+  color: #8a8a89;
+  font-weight: 500;
+  line-height: 1.29;
+}
+
+.dropedown {
+  position: absolute;
+  top: 52px;
+  left: 0;
+  z-index: 10;
+  width: 224px;
+  height: 272px;
+  background-color: white;
+  border-radius: 14px;
+  border: 1px solid rgba(18, 20, 23, 0.05);
+  padding: 14px 8px 14px 18px;
+}
+
+.dropdownlist {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 100%;
+  overflow-x: auto;
+
+  ::-webkit-scrollbar {
+    position: absolute;
+    right: 50px;
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #ffffff;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #12141773;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #121417;
+    opacity: 20%;
+  }
+}
+
+.dropdownprise {
+  width: 125px;
+  height: 188px;
+}
+
+.dropdownitem {
+  color: #12141773;
+  cursor: pointer;
+  transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  &:hover {
+    color: #121417;
+  }
+}
+
+.inputwrap {
+  position: relative;
+}
+
+.inputfrom {
+  position: relative;
+  background-color: #f7f7fb;
+  padding: 14px 24px 14px 75px;
+  border-color: #8a8a8933;
+  border-radius: 14px 0px 0px 14px;
+  border: transparent;
+  border-right-style: solid;
+  border-right-width: 1px;
+  height: 42px;
+  max-width: 160px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.11;
+  outline: transparent;
+}
+
+.inputto {
+  background-color: #f7f7fb;
+  border-color: #8a8a8933;
+  padding: 14px 24px 14px 55px;
+  border-radius: 0px 14px 14px 0px;
+  border-right: transparent;
+  border-top: transparent;
+  border-bottom: transparent;
+  height: 42px;
+  left: 160px;
+  width: 160px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.11;
+  outline: transparent;
+}
+
+.labelinput {
+  position: absolute;
+  left: 24px;
+  top: 14px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.11;
 }
 
 .searchformbutton {
@@ -42,20 +138,20 @@
   background-color: #0b44cd;
 }
 
-.searchforminput {
-  width: 160px;
-  height: 48px;
-  font-size: 14px;
-  background-color: #f7f7fb;
-  border: none;
-  outline: none;
+.selectprice {
+  width: 130px;
 }
 
-.labelforselect .labelforinput {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 125;
-  height: 74;
-  background-color: #f7f7fb;
+@media screen and (min-width: 760px) {
+  .filterLabel {
+    font-size: 14px;
+  }
+  .select {
+    width: 224px;
+    font-size: 18px;
+  }
+  .inputfrom .inputto .labelinput {
+    height: 48px;
+    font-size: 18px;
+  }
 }

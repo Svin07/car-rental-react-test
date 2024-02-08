@@ -18,11 +18,55 @@ body {
   overflow: hidden;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+ul,
+ol {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+ul::-webkit-scrollbar,
+body::-webkit-scrollbar,
+div::-webkit-scrollbar {
+  position: absolute;
+  right: 50px;
+  width: 8px;
+}
+
+ul::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track,
+div::-webkit-scrollbar-track {
+  background: #fff;
+  border-radius: 10px;
+}
+
+ul::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb,
+div::-webkit-scrollbar-track {
+  background: #1214170d;
+  border-radius: 10px;
+}
+
+ul::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover,
+div::-webkit-scrollbar-thumb:hover {
+  background: #3470ff;
+}
+
 button {
   padding: 0;
   border: none;
   font: inherit;
-
   color: inherit;
   background-color: transparent;
   cursor: pointer;

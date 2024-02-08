@@ -2,7 +2,7 @@ import persistReducer from 'redux-persist/es/persistReducer';
 import storage from 'redux-persist/lib/storage';
 import { carsReducer } from './cars/carsSlice';
 import { favoriteReducer } from './favorite/favoriteSlice';
-import { filterReducer } from './filter/filterSlice';
+import { filterReducer } from './filters/filterSlice';
 
 const favoritePersistConfig = {
   key: 'favorite',

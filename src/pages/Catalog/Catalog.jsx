@@ -1,122 +1,101 @@
-/* eslint-disable no-unused-expressions */
+/* eslint-disable no-use-before-define */
+
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
+
 import Loader from '../../components/Loader/Loader';
-import { getAllCars, getCarById, getCarsBySearch } from 'API/API/api';
+import Error from '../../components/Error/Error';
 import CarsList from '../../components/CarsList/CarsList';
 import Search from '../../components/Search/Search';
 import Button from 'components/Button/Button';
-import css from './Home.module.css';
-import ModalWindow from 'components/ModalWindow/ModalWindow';
-import { save } from 'helpers/getLocalStorage';
+
+import css from './Catalog.module.css';
+
+import { getFilteredCars } from '../../helpers/getFilteredCars';
+import { clearCarsData } from '../../redux/cars/carsSlice';
+import { getAllCars, getAllCarsWithoutPage } from '../../redux/cars/carsAPI';
+import {
+  selectCars,
+  selectCarsFilter,
+  selectError,
+  selectIsLoading,
+} from '../../redux/cars/carsSelectors';
+import {
+  selectBrand,
+  selectMileageFrom,
+  selectMileageTo,
+  selectOnFilter,
+  selectPrice,
+} from '../../redux/filters/filterSelectors';
 
 const Catalog = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [cars, setCars] = useState([]);
-  const [carById, setCarById] = useState({});
+  const dispatch = useDispatch();
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
+  const allCars = useSelector(selectCars);
+  const onFilter = useSelector(selectOnFilter);
+  const brandFilter = useSelector(selectBrand);
+  const allCarsForFilter = useSelector(selectCarsFilter);
+  const mileageFrom = useSelector(selectMileageFrom);
+  const mileageTo = useSelector(selectMileageTo);
+  const priceFilter = useSelector(selectPrice);
   const [page, setPage] = useState(1);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [favoriteCar, setfavoriteCar] = useState([]);
 
-  const body = document.body;
   const totalPage = 3;
 
-  const fetchCars = async () => {
-    try {
-      setIsLoading(true);
-      const data = await getAllCars(page);
-
-      setCars(prevCars => [...prevCars, ...data]);
-    } catch (error) {
-      setError(error.response.data.status_message);
-    } finally {
-      setIsLoading(false);
+  useEffect(() => {
+    const height = 426;
+    if (allCars.length > 12) {
+      window.scrollBy({
+        top: height * 1.3,
+        behavior: 'smooth',
+      });
     }
-  };
+  }, [allCars]);
 
   useEffect(() => {
-    fetchCars();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page]);
+    dispatch(clearCarsData());
+  }, [dispatch]);
 
-  const paginationPageUpdate = () => {
-    setPage(prevPage => prevPage + 1);
-  };
-
-  const handlySetSearchQuery = async query => {
-    const newCars = await getCarsBySearch(query);
-
-    setCars(prevCars => newCars);
-  };
-
-  const toggleModal = () => {
-    //вмикаємо-вимикаємо модалку(корзину)
-    setModalOpen(!modalOpen);
-    //вмикаємо-вимикаємо скролл головної сторінки на момент відкриття модлки(корзини)
-    !modalOpen
-      ? body.classList.add('disable-scroll')
-      : body.classList.remove('disable-scroll');
-  };
-
-  const handlySearchfromId = async id => {
-    if (!id) {
-      console.log('Неможливо знайти значення!');
-      return;
-    }
-    try {
-      setIsLoading(true);
-      const data = await getCarById(id);
-      setCarById(data[0]);
-      toggleModal();
-    } catch (error) {
-      setError(error.response.data.status_message);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const addToFavorite = async id => {
-    const newFavoriteCar = cars.find(car => car.id === id);
-
-    newFavoriteCar.isFavorite = true;
-
-    setfavoriteCar(prevCars => [...prevCars, newFavoriteCar]);
-  };
-
-  const deleteFromFavorite = async id => {
-    const newFavoriteCar = favoriteCar.filter(car => car.id !== id);
-
-    setfavoriteCar(prevCars => newFavoriteCar);
+  const handleLoadMoreClick = () => {
+    setPage(prev => prev + 1);
   };
   useEffect(() => {
-    console.log(favoriteCar);
-    save('cars', favoriteCar);
-  }, [favoriteCar]);
+    dispatch(getAllCars(page));
+  }, [dispatch, page]);
+
+  useEffect(() => {
+    if (onFilter) {
+      dispatch(getAllCarsWithoutPage());
+    }
+  }, [dispatch, onFilter]);
+
+  const filteredCars = getFilteredCars(
+    allCarsForFilter,
+    brandFilter,
+    priceFilter,
+    mileageFrom,
+    mileageTo
+  );
+
+  const combinedCars = onFilter ? filteredCars : allCars;
   return (
-    <>
-      {modalOpen && (
-        <ModalWindow
-          car={carById}
-          togleModal={toggleModal}
-          isLoading={isLoading}
-          error={error}
-        />
-      )}
-      <Search handlySetSearchQuery={handlySetSearchQuery} />
-      <div>{isLoading && <Loader />}</div>
-      {error && <h2>{error}</h2>}
-      <div className={css.pageBc}>
-        <CarsList
-          addToFavorite={addToFavorite}
-          deleteFromFavorite={deleteFromFavorite}
-          handlySearchfromId={handlySearchfromId}
-          cars={cars}
-        />
-      </div>
-      {page < totalPage && (
-        <Button paginationPageUpdate={paginationPageUpdate} />
-      )}
-    </>
+    <div className={css.container}>
+      {isLoading && !error && <Loader />}
+      <Search />
+      <section className={css.section}>
+        {filteredCars.length === 0 && onFilter ? (
+          <Error emptyFilter={true} />
+        ) : (
+          <CarsList cars={combinedCars} />
+        )}
+
+        {page < totalPage && (
+          <Button paginationPageUpdate={handleLoadMoreClick}>Load more</Button>
+        )}
+      </section>
+    </div>
   );
 };
 

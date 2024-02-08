@@ -1,29 +1,14 @@
-// компонент MoviesList, сторінка пошуку кінофільмів за ключовим словом
-
 import css from './CarsList.module.css';
-import MoviesItem from '../MoviesItem/MoviesItem';
+import CarItem from '../CarItem/CarItem';
 
-export default function CarsList({
-  cars,
-  handlySearchfromId,
-  addToFavorite,
-  deleteFromFavorite,
-}) {
+export default function CarsList({ cars }) {
   return (
     <>
-      <div>
-        <ul className={css.carslist}>
-          {cars.map(car => (
-            <MoviesItem
-              key={car.id}
-              car={car}
-              handlySearchfromId={handlySearchfromId}
-              addToFavorite={addToFavorite}
-              deleteFromFavorite={deleteFromFavorite}
-            />
-          ))}
-        </ul>
-      </div>
+      <ul className={css.carslist}>
+        {cars.map(car => (
+          <CarItem key={car.id} car={car} />
+        ))}
+      </ul>
     </>
   );
 }

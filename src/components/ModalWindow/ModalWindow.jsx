@@ -1,7 +1,7 @@
-import Loader from 'components/Loader/Loader';
 import css from './ModalWindow.module.css';
+import x from '../../img/x.svg';
 
-export default function ModalWindow({ car, togleModal, isLoading, error }) {
+export default function ModalWindow({ car, toggleModal }) {
   const {
     img,
     id,
@@ -29,15 +29,13 @@ export default function ModalWindow({ car, togleModal, isLoading, error }) {
         <div className={css.modalwindow}>
           <button
             type="button"
-            onClick={togleModal}
+            onClick={toggleModal}
             className={css.modalclosebtn}
           >
             <svg width="8" height="8">
-              <img src="/public/x.svg" alt="" />
+              <img src={x} alt="" />
             </svg>
           </button>
-          <div>{isLoading && <Loader />}</div>
-          {error && <h2>{error}</h2>}
           <div className={css.prodactcard}>
             <div className={css.imgWraper}>
               <img src={img} alt={make} className={css.movieGalleryItemImage} />
@@ -76,9 +74,7 @@ export default function ModalWindow({ car, togleModal, isLoading, error }) {
               <span className={css.titlespan}>{rentalPrice}</span>
             </li>
             <button type="button" className={css.linkDetails}>
-              <a class="link mail" href="tel:+380730000000">
-                Rental car
-              </a>
+              <a href="tel:+380730000000">Rental car</a>
             </button>
           </div>
         </div>
