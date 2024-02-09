@@ -20,6 +20,7 @@ export const modelData = [
   'Chrysler',
   'Kia',
   'Land',
+  'Toyota',
 ];
 
 export const priceData = [

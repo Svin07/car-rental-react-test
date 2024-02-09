@@ -3,10 +3,11 @@ import css from './Header.module.css';
 import styled from 'styled-components';
 
 const StyledLink = styled(NavLink)`
-  color: white;
+  color: black;
+  text-decoration: underline;
 
   &.active {
-    color: orange;
+    color: #7a4805;
   }
 `;
 

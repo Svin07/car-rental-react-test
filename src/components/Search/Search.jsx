@@ -1,4 +1,5 @@
 /* eslint-disable no-use-before-define */
+
 import { useState } from 'react';
 import { modelData, priceData } from '../../constants/dataConstants';
 
@@ -92,58 +93,64 @@ export default function Search() {
 
   return (
     <form className={css.searchform}>
-      <div>
-        <label className={css.filterLabel}>Car brand</label>
-        <div style={{ position: 'relative' }}>
-          <select className={css.select} onClick={handleShownSelectedBrand}>
-            {selectedBrand}
-          </select>
-          {isShownSelectBrand && (
-            <div className={css.dropedown}>
-              <ul className={css.dropdownlist}>
-                {modelData.map(el => (
-                  <li
-                    className={css.dropdownitem}
-                    key={el}
-                    onClick={() => changeBrand(el)}
-                  >
-                    {el}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </div>
+      <div className={css.dropDown}>
+        <p className={css.dropDownTitle}>Car brand</p>
+        <button
+          onClick={handleShownSelectedBrand}
+          className={css.dropDownButton}
+        >
+          {selectedBrand}
+        </button>
+        <ul
+          className={
+            isShownSelectBrand ? css.dropDownListVisiable : css.dropDownList
+          }
+        >
+          {modelData.map(model => (
+            <li
+              onClick={() => changeBrand(model)}
+              className={css.dropDownListItem}
+              key={model}
+            >
+              {model}
+            </li>
+          ))}
+        </ul>
       </div>
-      <div>
-        <label className={css.filterLabel}>Price/ 1 hour</label>
-        <div style={{ position: 'relative' }}>
-          <select className={css.select} onClick={handleShownSelectedPrice}>
-            {selectedPrice}
-          </select>
-          {isShownSelectPrice && (
-            <div className={css.dropdownprise}>
-              <ul className={css.dropdownlist}>
-                {priceData.map(el => (
-                  <li
-                    className={css.dropdownitem}
-                    key={el}
-                    onClick={() => changePrice(el)}
-                  >
-                    {el}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </div>
+
+      <div className={css.dropDown}>
+        <p className={css.dropDownTitle}>Price/ 1 hour</p>
+        <button
+          onClick={handleShownSelectedPrice}
+          className={css.dropDownButtonPrice}
+        >
+          {selectedPrice}
+        </button>
+        <ul
+          className={
+            isShownSelectPrice
+              ? css.dropDownListPriceVisiable
+              : css.dropDownListPrice
+          }
+        >
+          {priceData.map(price => (
+            <li
+              onClick={() => changePrice(price)}
+              className={css.dropDownListItem}
+              key={price}
+            >
+              {price}
+            </li>
+          ))}
+        </ul>
       </div>
-      <div>
-        <label className={css.filterLabel}>Сar mileage / km</label>
+
+      <div className={css.inputBlock}>
+        <label className={css.labelInputTop}>Сar mileage / km</label>
         <div style={{ display: 'flex' }}>
-          <div className={css.inputwrap}>
+          <div className={css.inputWrap}>
             <input
-              className={css.inputfrom}
+              className={css.inputFrom}
               type="text"
               mask="9,999"
               title="Only number"
@@ -151,13 +158,13 @@ export default function Search() {
               value={selectedFromMileage}
               id="mileageFrom"
             />
-            <label className={css.label} htmlFor="mileageFrom">
+            <label className={css.labelInput} htmlFor="mileageFrom">
               From
             </label>
           </div>
-          <div className={css.inputwrap}>
+          <div className={css.inputWrap}>
             <input
-              className={css.inputto}
+              className={css.inputTo}
               type="text"
               mask="9,999"
               title="Only number"
@@ -165,18 +172,25 @@ export default function Search() {
               value={selectedToMileage}
               id="mileageTo"
             />
-            <label className={css.labelinput} htmlFor="mileageTo">
+            <label className={css.labelInput} htmlFor="mileageTo">
               To
             </label>
           </div>
         </div>
       </div>
-      <button className={css.searchformbutton} onClick={handleFilterSubmit}>
+      <button type="button" className={css.button} onClick={handleFilterSubmit}>
         Search
       </button>
-      <button className={css.searchformbutton} onClick={handleFilterClear}>
+      <button type="button" className={css.button} onClick={handleFilterClear}>
         Reset
       </button>
     </form>
   );
 }
+
+/* <input
+          type="text"
+          value=""
+          name="select-model"
+          className={css.dropDownInputHidden}
+        /> */

@@ -1,13 +1,13 @@
 .container {
   display: flex;
   justify-content: center;
-  margin-top: 50px;
+  margin-top: 30px;
+  background-color: #2a2a2a;
   background-image: url('../../img/404_12.jpg');
   background-size: cover;
-  background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  min-height: calc(100vh - (95px + 84px));
+  min-height: calc(100vh - (50px + 74px));
 }
 
 .emptytext {
@@ -19,7 +19,7 @@
   text-align: center;
   color: #fff;
   font-weight: 900;
-  text-transform: uppercase;
+  text-transform: none;
   font-size: 44px;
   text-shadow: 1px 1px 0px #000000, -1px -1px 0px #ffffff;
 }

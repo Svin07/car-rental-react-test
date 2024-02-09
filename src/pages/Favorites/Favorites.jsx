@@ -11,6 +11,7 @@ import { selectFavorite } from '../../redux/favorite/favoriteSelectors';
 import { EmptyFavorite } from 'components/EmptyFavorite/EmptyFavorite';
 
 import css from './Favorites.module.css';
+import Search from 'components/Search/Search';
 
 export default function Favorites() {
   const mileageFrom = useSelector(selectMileageFrom);
@@ -28,18 +29,21 @@ export default function Favorites() {
   );
 
   return (
-    <div className="">
-      {favorite.length === 0 ? (
-        <EmptyFavorite />
-      ) : (
-        <div>
-          <ul className={css.carslist}>
-            {filteredCars.map(car => (
-              <CarItem key={car.id} car={car} />
-            ))}
-          </ul>
-        </div>
-      )}
+    <div className={css.container}>
+      <section className={css.section}>
+        {favorite.length === 0 ? (
+          <EmptyFavorite />
+        ) : (
+          <div>
+            <Search />
+            <ul className={css.carslist}>
+              {filteredCars.map(car => (
+                <CarItem key={car.id} car={car} />
+              ))}
+            </ul>
+          </div>
+        )}
+      </section>
     </div>
   );
 }

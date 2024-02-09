@@ -82,9 +82,12 @@ const Catalog = () => {
   const combinedCars = onFilter ? filteredCars : allCars;
   return (
     <div className={css.container}>
+      
+        <Search />
+      
       {isLoading && !error && <Loader />}
-      <Search />
-      <section className={css.section}>
+
+      
         {filteredCars.length === 0 && onFilter ? (
           <Error emptyFilter={true} />
         ) : (
@@ -94,7 +97,7 @@ const Catalog = () => {
         {page < totalPage && (
           <Button paginationPageUpdate={handleLoadMoreClick}>Load more</Button>
         )}
-      </section>
+      
     </div>
   );
 };
