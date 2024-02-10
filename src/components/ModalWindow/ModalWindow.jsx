@@ -1,5 +1,6 @@
 import css from './ModalWindow.module.css';
-import x from '../../img/x.svg';
+
+import { IoMdClose } from 'react-icons/io';
 
 export default function ModalWindow({ car, toggleModal }) {
   const {
@@ -32,9 +33,7 @@ export default function ModalWindow({ car, toggleModal }) {
             onClick={toggleModal}
             className={css.modalclosebtn}
           >
-            <svg width="8" height="8">
-              <img src={x} alt="" />
-            </svg>
+            <IoMdClose className={css.icon} />
           </button>
           <div className={css.prodactcard}>
             <div className={css.imgWraper}>

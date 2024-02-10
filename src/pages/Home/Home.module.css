@@ -1,11 +1,52 @@
 .container {
+  position: relative;
+  width: 1980px;
+  height: 860px;
+  margin: 0 auto;
+  padding-top: 0px;
+  background-image: url('../../img/181-Mercedes-Benz-vision-avtr-1.jpg');
+  background-position: 50% 50%;
+  background-size: cover;
+}
+
+.hero {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  background-image: linear-gradient(
+    rgba(230, 231, 255, 0.4),
+    rgba(202, 202, 210, 0.4)
+  );
+
   width: 100%;
-  padding-left: 16px;
-  padding-right: 16px;
-  margin: 0;
+  top: 270px;
+  height: 300px;
 }
 
 .homeTitle {
   display: block;
   text-align: center;
+
+  font-size: 48px;
+  font-weight: 700;
+  color: beige;
+  text-shadow: 2px 2px 0px #000000, -1px -1px 0px #ffffff;
+}
+
+.subHomeTitle {
+  composes: homeTitle;
+
+  font-size: 44px;
+}
+
+.logo {
+  text-decoration: none;
+  text-transform: capitalize;
+  font-style: italic;
+  color: #3470ff;
 }

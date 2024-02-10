@@ -1,0 +1,49 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 120;
+}
+
+.wraper {
+  position: relative;
+  display: flex;
+  width: 200px;
+  height: 100vh;
+  padding: 145px 20px 20px 20px;
+  background-color: #3470ff;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.button {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  top: 100px;
+  right: 20px;
+  border-radius: 50%;
+  background-color: #fff;
+  border: 0;
+  color: #121417;
+  transition: 0.2s linear;
+}
+
+.button:hover {
+  box-shadow: 0 0 0 2px white, 0 0 0 4px #3a2f28;
+}
+
+.respWraper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}

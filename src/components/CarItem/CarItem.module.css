@@ -16,6 +16,7 @@
   height: 268px;
   border-radius: 14px;
   object-fit: cover;
+  margin-bottom: 14px;
 }
 
 .movieGalleryItemImage:hover {
@@ -51,6 +52,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 8px;
 }
 
 .itemtitle {
@@ -73,6 +75,7 @@
   font-weight: 500;
   color: #121417;
   opacity: 50%;
+  margin-bottom: 28px;
 }
 .titlespan {
   color: #3470ff;

@@ -9,13 +9,45 @@ a {
   position: sticky;
   z-index: 10;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
-  min-height: 36px;
-  width: 100%;
+  height: 60px;
+
   padding-right: 24px;
   padding-left: 24px;
   padding-top: 12px;
   padding-bottom: 12px;
-  background-image: linear-gradient(to bottom, #3470ff, #fff);
+  background-color: azure;
+}
+
+.visionWraper {
+  display: none;
+}
+
+.visionMobileMenu {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .visionWraper {
+    display: block;
+  }
+
+  .visionMobileMenu {
+    display: none;
+  }
+}
+
+.respWraper {
+  display: flex;
+  gap: 40px;
+}
+
+.logo {
+  text-decoration: none;
+  text-transform: capitalize;
+  font-style: italic;
+  color: #3470ff;
+  font-size: 38px;
+  font-weight: 600;
 }

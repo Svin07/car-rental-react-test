@@ -40,6 +40,7 @@ export default function CarItem({ car }) {
         <FavoritIcon dataCar={car} />
         <div className={css.imgWraper}>
           <img
+            onClick={toggleModal}
             src={img ? `${img}` : defaultImg}
             alt={make}
             className={css.movieGalleryItemImage}

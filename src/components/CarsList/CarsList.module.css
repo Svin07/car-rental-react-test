@@ -1,5 +1,12 @@
+.carsGrid {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 .carslist {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 50px 29px;
+  grid-template-columns: repeat(auto-fit, minmax(274px, 1fr));
+  gap: 50px 9px;
+  justify-items: center;
+  justify-content: space-around;
 }

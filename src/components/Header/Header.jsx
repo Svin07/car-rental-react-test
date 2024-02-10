@@ -1,6 +1,10 @@
 import { NavLink, Link } from 'react-router-dom';
+import { useState } from 'react';
+
 import css from './Header.module.css';
 import styled from 'styled-components';
+import MobileMenu from 'components/MobileMenu/MobileMenu';
+import { ReactComponent as Burger } from '../../img/menu.svg';
 
 const StyledLink = styled(NavLink)`
   color: black;
@@ -12,14 +16,30 @@ const StyledLink = styled(NavLink)`
 `;
 
 export default function Header() {
+  const [showModal, setShowModal] = useState(false);
+
+  const toggleMobilMenu = () => {
+    setShowModal(!showModal);
+  };
+
   return (
     <header className={css.header}>
       <Link to="/">
-        <h2>*GREAT LOGO*</h2>
+        <span className={css.logo}>Car rental</span>
       </Link>
-      <StyledLink to="/">Home</StyledLink>
-      <StyledLink to="catalog">Catalog</StyledLink>
-      <StyledLink to="favorites">Favorites</StyledLink>
+      <div className={css.visionWraper}>
+        <nav className={css.respWraper}>
+          <StyledLink to="/">Home</StyledLink>
+          <StyledLink to="catalog">Catalog</StyledLink>
+          <StyledLink to="favorites">Favorites</StyledLink>
+        </nav>
+      </div>
+      <div className={css.visionMobileMenu}>
+        <button className={css.burgerButton} onClick={toggleMobilMenu}>
+          <Burger />
+        </button>
+      </div>
+      {showModal && <MobileMenu toggleMobilMenu={toggleMobilMenu} />}
     </header>
   );
 }
