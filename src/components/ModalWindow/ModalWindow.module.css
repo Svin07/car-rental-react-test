@@ -180,3 +180,9 @@
     width: 461px;
   }
 }
+
+@media screen and (max-width: 767px) {
+  .modalwindow {
+    height: 90%;
+  }
+}
