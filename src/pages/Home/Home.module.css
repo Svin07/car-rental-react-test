@@ -76,12 +76,9 @@
   color: aliceblue;
 }
 
-@media screen and (min-width: 375px) {
-}
-
 @media screen and (max-width: 767px) {
   .hero {
-    top: 170px;
+    top: 120px;
   }
   .homeTitle {
     font-size: 42px;
