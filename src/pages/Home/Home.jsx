@@ -1,5 +1,9 @@
 import { Link } from 'react-router-dom';
 import css from './Home.module.css';
+import { FcStatistics } from 'react-icons/fc';
+import { FcCurrencyExchange } from 'react-icons/fc';
+import { FcCustomerSupport } from 'react-icons/fc';
+import { IconContext } from 'react-icons';
 
 export default function Home() {
   return (
@@ -14,6 +18,45 @@ export default function Home() {
             catalog
           </Link>
         </h3>
+      </section>
+      <section className={css.statistic}>
+        <div className={css.statisticItem}>
+          <IconContext.Provider
+            value={{
+              size: '3em',
+            }}
+          >
+            <div>
+              <FcStatistics />
+            </div>
+          </IconContext.Provider>
+          <h5 className={css.statisticText}>3560 cars were leased</h5>
+        </div>
+        <div className={css.statisticItem}>
+          <IconContext.Provider
+            value={{
+              size: '3em',
+            }}
+          >
+            <div>
+              <FcCurrencyExchange />
+            </div>
+          </IconContext.Provider>
+          <h5 className={css.statisticText}>Convenient payment</h5>
+        </div>
+        <div className={css.statisticItem}>
+          <IconContext.Provider
+            value={{
+              size: '3em',
+              color: 'white',
+            }}
+          >
+            <div>
+              <FcCustomerSupport />
+            </div>
+          </IconContext.Provider>
+          <h5 className={css.statisticText}>Round-the-clock support</h5>
+        </div>
       </section>
     </div>
   );

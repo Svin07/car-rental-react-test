@@ -12,7 +12,6 @@ a {
   justify-content: space-around;
   align-items: center;
   height: 60px;
-
   padding-right: 24px;
   padding-left: 24px;
   padding-top: 12px;
@@ -26,6 +25,10 @@ a {
 
 .visionMobileMenu {
   display: block;
+}
+
+.burgerButton {
+  background-color: azure;
 }
 
 @media (min-width: 768px) {
