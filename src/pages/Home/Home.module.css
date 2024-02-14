@@ -10,7 +10,7 @@
 }
 
 .hero {
-  position: absolute;
+  position: fixed;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -48,7 +48,7 @@
 }
 
 .statistic {
-  position: absolute;
+  position: fixed;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -104,5 +104,11 @@
   .statisticText {
     font-size: 16px;
     color: aliceblue;
+  }
+}
+
+@media screen and (max-height: 579px) {
+  .statistic {
+    display: none;
   }
 }

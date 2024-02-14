@@ -14,7 +14,6 @@ export default function FavoritIcon({ dataCar }) {
 
   const handleFavorite = dataCar => {
     if (!favorite.some(car => car.id === dataCar.id)) {
-      console.log(dataCar);
       dispatch(addToFavorite(dataCar));
     } else {
       dispatch(removeFromFavorite(dataCar));
